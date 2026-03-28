@@ -8,22 +8,7 @@ import '../../presentation/bloc/todo_detail/todo_detail_event.dart';
 class CustomRouter {
   GoRouter get router => GoRouter(
     initialLocation: '/',
-    redirect: (context, state) {
-      if (state.uri.host == 'todo-detail') {
-        final path = state.uri.path;
-        if (path.isNotEmpty && path != '/') {
-          final idString = path.replaceAll('/', '');
-          final id = int.tryParse(idString);
-
-          if (id != null) {
-            sl<TodoDetailBloc>().add(GetDetailTodoEvent(id: id));
-          }
-
-          return '/todo-detail/$idString';
-        }
-      }
-      return null;
-    },
+    redirect: (context, state) => handleRedirect(state),
     routes: [
       GoRoute(
         path: '/',
@@ -41,4 +26,24 @@ class CustomRouter {
       ),
     ],
   );
+
+  static String? handleRedirect(GoRouterState state) {
+    final uri = state.uri;
+    final host = uri.host;
+    final path = uri.path;
+
+    if ((host == 'rizkyghofur.my.id' || host == 'www.rizkyghofur.my.id') &&
+        path.contains('/todo-detail/')) {
+      final idString = path.split('/').last;
+
+      if (idString.isNotEmpty) {
+        final id = int.tryParse(idString);
+        if (id != null) {
+          sl<TodoDetailBloc>().add(GetDetailTodoEvent(id: id));
+          return '/todo-detail/$idString';
+        }
+      }
+    }
+    return null;
+  }
 }
