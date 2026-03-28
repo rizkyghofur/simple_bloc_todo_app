@@ -36,7 +36,7 @@ class TodoDetailPage extends StatelessWidget {
                     SharePlus.instance.share(
                       ShareParams(
                         text:
-                            'Check out this task: ${todo.todo}\nStatus: ${todo.completed ? "Completed" : "Pending"}\n\nOpen in app: simplebloc://todo-detail/${todo.id}',
+                            'Check out this task: ${todo.todo}\nStatus: ${todo.completed ? "Completed" : "Pending"}\n\nOpen in app:\nhttps://rizkyghofur.my.id/todo-detail/${todo.id}',
                       ),
                     );
                   },
