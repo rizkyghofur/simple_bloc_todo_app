@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LoadingStateWidget extends StatelessWidget {
-  const LoadingStateWidget({super.key});
+  final String message;
+  const LoadingStateWidget({
+    super.key,
+    this.message = 'Fetching your tasks...',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class LoadingStateWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Fetching your tasks...',
+            message,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Colors.grey[600],
               letterSpacing: 0.5,

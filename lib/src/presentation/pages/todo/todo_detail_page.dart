@@ -65,7 +65,9 @@ class TodoDetailPage extends StatelessWidget {
           bloc: sl<TodoDetailBloc>()..add(GetDetailTodoEvent(id: id)),
           builder: (context, state) {
             if (state is TodoDetailLoading) {
-              return const LoadingStateWidget();
+              return const LoadingStateWidget(
+                message: 'Fetching task details...',
+              );
             }
 
             if (state is TodoDetailError) {
