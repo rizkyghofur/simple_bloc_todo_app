@@ -13,8 +13,40 @@ import '../../widgets/todo/todo_empty_state_widget.dart';
 import '../../widgets/todo/todo_item.dart';
 import '../../widgets/todo/todo_search_bar.dart';
 
-class TodoGetPage extends StatelessWidget {
+class TodoGetPage extends StatefulWidget {
   const TodoGetPage({super.key});
+
+  @override
+  State<TodoGetPage> createState() => _TodoGetPageState();
+}
+
+class _TodoGetPageState extends State<TodoGetPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_isBottom) {
+      sl<TodoBloc>().add(const LoadMoreTodoEvent());
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +95,36 @@ class TodoGetPage extends StatelessWidget {
                   Expanded(
                     child: todos.isEmpty
                         ? const TodoEmptyStateWidget()
-                        : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            itemCount: todos.length,
-                            itemBuilder: (context, index) {
-                              final todo = todos[index];
-                              return TodoItem(
-                                todo: todo,
-                                onTap: () {
-                                  context.push('/todo-detail/${todo.id}');
-                                },
-                              );
+                        : RefreshIndicator.adaptive(
+                            onRefresh: () async {
+                              sl<TodoBloc>().add(const GetTodoEvent());
                             },
+                            child: ListView.builder(
+                              controller: _scrollController,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              itemCount: state.isLoadingMore
+                                  ? todos.length + 1
+                                  : todos.length,
+                              itemBuilder: (context, index) {
+                                if (index >= todos.length) {
+                                  return const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 16),
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
+                                final todo = todos[index];
+                                return TodoItem(
+                                  todo: todo,
+                                  onTap: () {
+                                    context.push('/todo-detail/${todo.id}');
+                                  },
+                                );
+                              },
+                            ),
                           ),
                   ),
                 ],

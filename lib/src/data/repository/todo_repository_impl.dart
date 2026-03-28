@@ -13,12 +13,14 @@ class TodoRepositoryImpl implements TodoRepository {
   TodoRepositoryImpl({required this.remoteDataSource});
 
   @override
-  ResultFuture<TodoEntity> get() async {
+  ResultFuture<TodoEntity> get({int limit = 10, int skip = 0}) async {
     try {
-      final result = await remoteDataSource.get();
+      final result = await remoteDataSource.get(limit: limit, skip: skip);
       return Right(result.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
     } catch (e) {
       return Left(ServerFailure('Unexpected error: ${e.toString()}'));
     }
@@ -31,6 +33,8 @@ class TodoRepositoryImpl implements TodoRepository {
       return Right(result.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
     } catch (e) {
       return Left(ServerFailure('Unexpected error: ${e.toString()}'));
     }
@@ -52,6 +56,8 @@ class TodoRepositoryImpl implements TodoRepository {
       );
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
     } catch (e) {
       return Left(ServerFailure('Unexpected error: ${e.toString()}'));
     }

@@ -22,3 +22,10 @@ class SearchTodoEvent extends TodoEvent {
   @override
   List<Object?> get props => [query];
 }
+
+class LoadMoreTodoEvent extends TodoEvent {
+  const LoadMoreTodoEvent();
+
+  @override
+  List<Object?> get props => [];
+}

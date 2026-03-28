@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import '../../presentation/page/todo/todo_detail_page.dart';
-import '../../presentation/page/todo/todo_get_page.dart';
+import '../../presentation/pages/todo/todo_detail_page.dart';
+import '../../presentation/pages/todo/todo_get_page.dart';
 import '../../injection_container.dart';
 import '../../presentation/bloc/todo_detail/todo_detail_bloc.dart';
 import '../../presentation/bloc/todo_detail/todo_detail_event.dart';

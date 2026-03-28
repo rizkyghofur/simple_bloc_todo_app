@@ -5,6 +5,8 @@ import 'src/core/observer/custom_observer.dart';
 import 'src/core/router/custom_router.dart';
 import 'src/injection_container.dart';
 
+import 'src/core/themes/app_theme.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -21,6 +23,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       routerConfig: CustomRouter().router,
     );
   }

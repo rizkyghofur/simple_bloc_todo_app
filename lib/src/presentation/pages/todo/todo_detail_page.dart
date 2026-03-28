@@ -51,15 +51,13 @@ class TodoDetailPage extends StatelessWidget {
         foregroundColor: Colors.black,
       ),
       body: PopScope(
-        canPop:
-            false, // We handle the pop manually to ensure the stack is respected
+        canPop: false,
         onPopInvokedWithResult: (didPop, result) {
           if (didPop) return;
 
           if (context.canPop()) {
             context.pop();
           } else {
-            // If opened via deeplink without history, go to home
             context.go('/');
           }
         },

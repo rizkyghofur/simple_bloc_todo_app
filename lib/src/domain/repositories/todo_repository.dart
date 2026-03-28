@@ -4,7 +4,7 @@ import '../../data/models/todo_model.dart';
 import '../entities/todo.dart';
 
 abstract class TodoRepository {
-  Future<Either<Failure, TodoEntity>> get();
+  Future<Either<Failure, TodoEntity>> get({int limit = 10, int skip = 0});
 
   Future<Either<Failure, TodoEntity>> detail(int id);
 

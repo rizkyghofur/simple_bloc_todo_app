@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
 import '../constants/api_constants.dart';
 import '../error/exceptions.dart';
 
@@ -19,14 +20,16 @@ class DioClient {
       ),
     );
 
-    // Add logging interceptor for debugging
     _dio.interceptors.add(
-      LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        error: true,
-        requestHeader: true,
-        responseHeader: false,
+      TalkerDioLogger(
+        settings: const TalkerDioLoggerSettings(
+          printRequestHeaders: true,
+          printResponseHeaders: false,
+          printResponseMessage: true,
+          printRequestData: true,
+          printResponseData: true,
+          printErrorData: true,
+        ),
       ),
     );
   }
@@ -233,22 +236,18 @@ class DioClient {
     }
   }
 
-  // Utility method to add authentication token
   void setAuthToken(String token) {
     _dio.options.headers['Authorization'] = 'Bearer $token';
   }
 
-  // Utility method to remove authentication token
   void clearAuthToken() {
     _dio.options.headers.remove('Authorization');
   }
 
-  // Utility method to update base URL
   void updateBaseUrl(String newBaseUrl) {
     _dio.options.baseUrl = newBaseUrl;
   }
 
-  // Close the Dio instance
   void close() {
     _dio.close();
   }

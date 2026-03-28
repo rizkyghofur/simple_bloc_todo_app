@@ -5,7 +5,7 @@ import '../../core/network/dio_client.dart';
 import '../models/todo_detail_model.dart';
 
 abstract class TodoRemoteDataSource {
-  Future<TodoModel> get();
+  Future<TodoModel> get({int limit = 10, int skip = 0});
 
   Future<TodoDetailModel> detail(int id);
 }
@@ -16,9 +16,12 @@ class TodoRemoteDataSourceImpl implements TodoRemoteDataSource {
   TodoRemoteDataSourceImpl({required this.dioClient});
 
   @override
-  Future<TodoModel> get() async {
+  Future<TodoModel> get({int limit = 10, int skip = 0}) async {
     try {
-      final response = await dioClient.get(ApiConstants.getTodoEndpoint);
+      final response = await dioClient.get(
+        ApiConstants.getTodoEndpoint,
+        queryParameters: {'limit': limit, 'skip': skip},
+      );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return TodoModel.fromJson(response.data);
       } else {

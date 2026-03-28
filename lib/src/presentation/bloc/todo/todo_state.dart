@@ -20,11 +20,41 @@ class TodoSuccess extends TodoState {
   final TodoEntity data;
   final TodoEntity? originalData;
   final bool isSearch;
+  final bool hasReachedMax;
+  final bool isLoadingMore;
 
-  const TodoSuccess(this.data, {this.originalData, this.isSearch = false});
+  const TodoSuccess(
+    this.data, {
+    this.originalData,
+    this.isSearch = false,
+    this.hasReachedMax = false,
+    this.isLoadingMore = false,
+  });
+
+  TodoSuccess copyWith({
+    TodoEntity? data,
+    TodoEntity? originalData,
+    bool? isSearch,
+    bool? hasReachedMax,
+    bool? isLoadingMore,
+  }) {
+    return TodoSuccess(
+      data ?? this.data,
+      originalData: originalData ?? this.originalData,
+      isSearch: isSearch ?? this.isSearch,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+    );
+  }
 
   @override
-  List<Object?> get props => [data, originalData, isSearch];
+  List<Object?> get props => [
+    data,
+    originalData,
+    isSearch,
+    hasReachedMax,
+    isLoadingMore,
+  ];
 }
 
 class TodoError extends TodoState {

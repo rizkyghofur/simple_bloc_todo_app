@@ -7,7 +7,7 @@ class GetTodo {
 
   GetTodo(this._repository);
 
-  ResultFuture<TodoEntity> call() async {
-    return await _repository.get();
+  ResultFuture<TodoEntity> execute({int limit = 10, int skip = 0}) async {
+    return await _repository.get(limit: limit, skip: skip);
   }
 }
