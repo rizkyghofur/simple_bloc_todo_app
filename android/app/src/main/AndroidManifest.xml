@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="simple_bloc_todo_app"
+        android:label="Simple Todo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

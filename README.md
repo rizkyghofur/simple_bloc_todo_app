@@ -2,7 +2,7 @@
 
 A modern, simple Todo application built with Flutter using Clean Architecture, BloC state management, and Dio.
 
-## 🚀 Features Checklist
+## Features Checklist
 
 ### Core Requirements
 
@@ -28,13 +28,13 @@ A modern, simple Todo application built with Flutter using Clean Architecture, B
 - [x] **Dark/Light Mode Support**
 - [x] **Pretty Logging** (`talker_dio_logger`)
 
-## 📸 Screenshots
+## Screenshots
 
 | List Screen | Search & States | Detail & Share |
 | :---: | :---: | :---: |
 | ![List Screen](assets/screenshots/list_screen.png) | ![Search State](assets/screenshots/search_state.png) | ![Detail Screen](assets/screenshots/detail_screen.png) |
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework:** Flutter
 - **State Management:** Bloc/Cubit
@@ -43,7 +43,7 @@ A modern, simple Todo application built with Flutter using Clean Architecture, B
 - **Routing:** GoRouter
 - **Testing:** Mocktail & BlocTest
 
-## 🏗 Architecture
+## Architecture
 
 The project follows **Clean Architecture** principles:
 
@@ -51,14 +51,14 @@ The project follows **Clean Architecture** principles:
 - **Data Layer:** Models, Repositories Implementation, and Data Sources.
 - **Presentation Layer:** Blocs, Pages, and Widgets.
 
-## 🎨 Themes
+## Themes
 
 The application supports both **Light** and **Dark** modes based on system settings. Theme configuration is modularized in `lib/src/core/themes/`:
 
 - `light_theme.dart`
 - `dark_theme.dart`
 
-## 🧪 Testing
+## Testing
 
 We have a comprehensive unit test suite covering Domain, Data, and Presentation layers.
 
@@ -69,7 +69,7 @@ We have a comprehensive unit test suite covering Domain, Data, and Presentation 
 flutter test
 ```
 
-## 🏁 Getting Started
+## Getting Started
 
 1. **Clone the repository**
 2. **Install dependencies:** `flutter pub get`
