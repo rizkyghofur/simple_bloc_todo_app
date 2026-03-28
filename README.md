@@ -13,7 +13,7 @@ A modern, simple Todo application built with Flutter using Clean Architecture, B
 - [x] **Implement a List Screen to display data**
 - [x] **Add Pull to Refresh functionality**
 - [x] **Implement Infinite Scroll / Load More**
-- [x] **Implement a Search Feature** (Local search with pre-fetching)
+- [x] **Implement a Search Feature**
 - [x] **Properly handle UI states**:
   - [x] Loading
   - [x] Empty
@@ -24,8 +24,9 @@ A modern, simple Todo application built with Flutter using Clean Architecture, B
 - [x] **Implement a Detail Screen with Share Content**
 - [x] **Use Dependency Injection** (`get_it`)
 - [x] **Deeplink handle for open Share Content Link**
-  - Scheme: `simplebloc://todo-detail/{id}`
-  - Handles both cold and warm starts with a proper navigation stack.
+- [x] **Unit Testing Implementation** (12 Tests Passed)
+- [x] **Dark/Light Mode Support**
+- [x] **Pretty Logging** (`talker_dio_logger`)
 
 ## 📸 Screenshots
 
@@ -37,10 +38,10 @@ A modern, simple Todo application built with Flutter using Clean Architecture, B
 
 - **Framework:** Flutter
 - **State Management:** Bloc/Cubit
-- **Networking:** Dio
+- **Networking:** Dio & TalkerDioLogger
 - **DI:** GetIt
 - **Routing:** GoRouter
-- **Deep Linking:** Native Intent Filters (Android) & URL Types (iOS)
+- **Testing:** Mocktail & BlocTest
 
 ## 🏗 Architecture
 
@@ -49,6 +50,24 @@ The project follows **Clean Architecture** principles:
 - **Domain Layer:** Entities, Use Cases, and Repository Interfaces.
 - **Data Layer:** Models, Repositories Implementation, and Data Sources.
 - **Presentation Layer:** Blocs, Pages, and Widgets.
+
+## 🎨 Themes
+
+The application supports both **Light** and **Dark** modes based on system settings. Theme configuration is modularized in `lib/src/core/themes/`:
+
+- `light_theme.dart`
+- `dark_theme.dart`
+
+## 🧪 Testing
+
+We have a comprehensive unit test suite covering Domain, Data, and Presentation layers.
+
+- **Total Tests:** 12
+- **Command to run:**
+
+```bash
+flutter test
+```
 
 ## 🏁 Getting Started
 

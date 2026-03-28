@@ -99,31 +99,36 @@ class _TodoGetPageState extends State<TodoGetPage> {
                             onRefresh: () async {
                               sl<TodoBloc>().add(const GetTodoEvent());
                             },
-                            child: ListView.builder(
-                              controller: _scrollController,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              itemCount: state.isLoadingMore
-                                  ? todos.length + 1
-                                  : todos.length,
-                              itemBuilder: (context, index) {
-                                if (index >= todos.length) {
-                                  return const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 16),
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
+                            child: SafeArea(
+                              child: ListView.builder(
+                                controller: _scrollController,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                itemCount: state.isLoadingMore
+                                    ? todos.length + 1
+                                    : todos.length,
+                                itemBuilder: (context, index) {
+                                  if (index >= todos.length) {
+                                    return const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 16,
+                                      ),
+                                      child: Center(
+                                        child:
+                                            CircularProgressIndicator.adaptive(),
+                                      ),
+                                    );
+                                  }
+                                  final todo = todos[index];
+                                  return TodoItem(
+                                    todo: todo,
+                                    onTap: () {
+                                      context.push('/todo-detail/${todo.id}');
+                                    },
                                   );
-                                }
-                                final todo = todos[index];
-                                return TodoItem(
-                                  todo: todo,
-                                  onTap: () {
-                                    context.push('/todo-detail/${todo.id}');
-                                  },
-                                );
-                              },
+                                },
+                              ),
                             ),
                           ),
                   ),
