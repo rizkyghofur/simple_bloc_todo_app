@@ -31,7 +31,7 @@ A modern, simple Todo application built with Flutter using Clean Architecture, B
 - [x] **Dark/Light Mode Support** (Custom Blue Theme)
 - [x] **Pretty Logging** (`talker_dio_logger`)
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework:** [Flutter](https://flutter.dev)
 - **State Management:** [Bloc/Cubit](https://pub.dev/packages/flutter_bloc)
