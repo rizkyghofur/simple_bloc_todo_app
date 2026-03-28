@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,12 +30,15 @@ void main() {
   );
 
   test('initial state should be TodoDetailInitial', () {
+    print('--- Running Test: TodoDetailBloc Initial State ---');
     expect(bloc.state, const TodoDetailInitial());
+    print('Result: SUCCESS\n');
   });
 
   blocTest<TodoDetailBloc, TodoDetailState>(
     'should emit [TodoDetailLoading, TodoDetailSuccess] when GetDetailTodoEvent is added',
     build: () {
+      print('--- Running Test: TodoDetailBloc Success Flow ---');
       when(
         () => mockDetailTodo(any()),
       ).thenAnswer((_) async => const Right(tTodoEntity));
@@ -47,12 +51,14 @@ void main() {
     ],
     verify: (_) {
       verify(() => mockDetailTodo(tId)).called(1);
+      print('Result: SUCCESS\n');
     },
   );
 
   blocTest<TodoDetailBloc, TodoDetailState>(
     'should emit [TodoDetailLoading, TodoDetailError] when GetDetailTodoEvent fails',
     build: () {
+      print('--- Running Test: TodoDetailBloc Error Flow ---');
       when(
         () => mockDetailTodo(any()),
       ).thenAnswer((_) async => const Left(ServerFailure('Server Error')));
@@ -63,5 +69,8 @@ void main() {
       const TodoDetailLoading(),
       const TodoDetailError('Server Error'),
     ],
+    verify: (_) {
+      print('Result: SUCCESS\n');
+    },
   );
 }

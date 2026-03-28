@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -22,6 +23,7 @@ void main() {
 
   group('get', () {
     test('should return TodoEntity when call is successful', () async {
+      print('--- Running Test: Repository Get Success ---');
       // arrange
       when(
         () => mockRemoteDataSource.get(
@@ -36,11 +38,13 @@ void main() {
       // assert
       expect(result, Right(tTodoModel.toEntity()));
       verify(() => mockRemoteDataSource.get(limit: 10, skip: 0)).called(1);
+      print('Result: SUCCESS\n');
     });
 
     test(
       'should return ServerFailure when datasource throws ServerException',
       () async {
+        print('--- Running Test: Repository Get Server Error ---');
         // arrange
         when(
           () => mockRemoteDataSource.get(
@@ -54,12 +58,14 @@ void main() {
 
         // assert
         expect(result, const Left(ServerFailure('Server Error')));
+        print('Result: SUCCESS\n');
       },
     );
 
     test(
       'should return NetworkFailure when datasource throws NetworkException',
       () async {
+        print('--- Running Test: Repository Get Network Error ---');
         // arrange
         when(
           () => mockRemoteDataSource.get(
@@ -73,6 +79,7 @@ void main() {
 
         // assert
         expect(result, const Left(NetworkFailure('Network Error')));
+        print('Result: SUCCESS\n');
       },
     );
   });

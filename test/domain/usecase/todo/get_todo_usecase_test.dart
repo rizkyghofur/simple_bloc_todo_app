@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -19,6 +20,7 @@ void main() {
   const tTodoEntity = TodoEntity(todos: [], total: 0, skip: 0, limit: 0);
 
   test('should get todos from the repository', () async {
+    print('--- Running Test: UseCase Get Todo ---');
     // arrange
     when(
       () => mockTodoRepository.get(
@@ -34,5 +36,6 @@ void main() {
     expect(result, const Right(tTodoEntity));
     verify(() => mockTodoRepository.get(limit: 10, skip: 0)).called(1);
     verifyNoMoreInteractions(mockTodoRepository);
+    print('Result: SUCCESS\n');
   });
 }

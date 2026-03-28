@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -25,6 +26,7 @@ void main() {
   );
 
   test('should get todo detail from the repository', () async {
+    print('--- Running Test: UseCase Detail Todo ---');
     // arrange
     when(
       () => mockTodoRepository.detail(any()),
@@ -37,5 +39,6 @@ void main() {
     expect(result, const Right(tTodoEntity));
     verify(() => mockTodoRepository.detail(tId)).called(1);
     verifyNoMoreInteractions(mockTodoRepository);
+    print('Result: SUCCESS\n');
   });
 }

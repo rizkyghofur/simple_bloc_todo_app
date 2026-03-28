@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -29,6 +30,7 @@ void main() {
   const tQuery = 'test';
 
   test('should call search from the repository', () async {
+    print('--- Running Test: UseCase Search Todo ---');
     // arrange
     when(
       () => mockTodoRepository.search(any(), any()),
@@ -41,5 +43,6 @@ void main() {
     expect(result, const Right(tTodoEntity));
     verify(() => mockTodoRepository.search(tTodoModel, tQuery)).called(1);
     verifyNoMoreInteractions(mockTodoRepository);
+    print('Result: SUCCESS\n');
   });
 }
