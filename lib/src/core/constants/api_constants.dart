@@ -4,5 +4,5 @@ class ApiConstants {
   static const String getTodoEndpoint = '/todos';
   static String detailTodoEndpoint(int id) => '/todos/$id';
 
-  static const Duration timeout = Duration(seconds: 10);
+  static const Duration timeout = Duration(seconds: 30);
 }
