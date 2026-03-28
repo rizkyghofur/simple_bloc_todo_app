@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TODO_ADD_TEAM_ID.com.example.simple_bloc_todo_app",
+        "paths": [
+          "/todo-detail/*"
+        ]
+      }
+    ]
+  }
+}
